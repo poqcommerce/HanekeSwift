@@ -10,14 +10,14 @@ import Foundation
 
 extension String {
     
-    func escapedFilename() -> String {
+    public func escapedFilename() -> String {
         return [ "\0":"%00", ":":"%3A", "/":"%2F" ]
             .reduce(self.components(separatedBy: "%").joined(separator: "%25")) {
                 str, m in str.components(separatedBy: m.0).joined(separator: m.1)
         }
     }
     
-    func MD5String() -> String {
+    public func MD5String() -> String {
         guard let data = self.data(using: String.Encoding.utf8) else {
             return self
         }
@@ -33,7 +33,7 @@ extension String {
         return MD5String as String
     }
     
-    func MD5Filename() -> String {
+    public func MD5Filename() -> String {
         let MD5String = self.MD5String()
 
         // NSString.pathExtension alone could return a query string, which can lead to very long filenames.
