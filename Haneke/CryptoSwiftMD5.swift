@@ -24,7 +24,7 @@ Permission is granted to anyone to use this software for any purpose,including c
 import Foundation
 
 /** array of bytes, little-endian representation */
-func arrayOfBytes<T>(value:T, length:Int? = nil) -> [UInt8] {
+public func arrayOfBytes<T>(value:T, length:Int? = nil) -> [UInt8] {
     let totalBytes = length ?? MemoryLayout<T>.size
     
     let valuePointer = UnsafeMutablePointer<T>.allocate(capacity: 1)
@@ -74,17 +74,17 @@ struct BytesSequence: Sequence {
     }
 }
 
-class HashBase {
+public class HashBase {
     
-    static let size:Int = 16 // 128 / 8
-    let message: [UInt8]
+    static let size: Int = 16 // 128 / 8
+    public let message: [UInt8]
     
-    init (_ message: [UInt8]) {
+    public  init (_ message: [UInt8]) {
         self.message = message
     }
     
     /** Common part for hash calculation. Prepare header data. */
-    func prepare(_ len:Int) -> [UInt8] {
+    public func prepare(_ len:Int) -> [UInt8] {
         var tmpMessage = message
         
         // Step 1. Append Padding Bits
@@ -122,7 +122,7 @@ func sliceToUInt32Array(_ slice: ArraySlice<UInt8>) -> [UInt32] {
     return result
 }
 
-class MD5 : HashBase {
+public  class MD5 : HashBase {
     
     
     /** specifies the per-round shift amounts */
@@ -151,7 +151,7 @@ class MD5 : HashBase {
     
     private let h: [UInt32] = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476]
     
-    func calculate() -> [UInt8] {
+   public func calculate() -> [UInt8] {
         var tmpMessage = prepare(64)
         tmpMessage.reserveCapacity(tmpMessage.count + 4)
         
