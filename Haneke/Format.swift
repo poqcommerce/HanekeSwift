@@ -62,18 +62,22 @@ public struct ImageResizer {
     }
     
     public func resizeImage(_ image: UIImage) -> UIImage {
+        // Make sure we have non-zero size
+        guard size.width > 0, size.height > 0, image.size.width > 0, image.size.height > 0 else {
+            return image
+        }
+        
         var resizeToSize: CGSize
-        switch self.scaleMode {
+        switch scaleMode {
         case .Fill:
-            resizeToSize = self.size
+            resizeToSize = size
         case .AspectFit:
-            resizeToSize = image.size.hnk_aspectFitSize(self.size)
+            resizeToSize = image.size.hnk_aspectFitSize(size)
         case .AspectFill:
-            resizeToSize = image.size.hnk_aspectFillSize(self.size)
+            resizeToSize = image.size.hnk_aspectFillSize(size)
         case .None:
             return image
         }
-        assert(self.size.width > 0 && self.size.height > 0, "Expected non-zero size. Use ScaleMode.None to avoid resizing.")
         
         // If does not allow to scale up the image
         if (!self.allowUpscaling) {
