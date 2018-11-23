@@ -10,12 +10,12 @@ import UIKit
 
 extension UIImage {
 
-    func hnk_imageByScaling(toSize size: CGSize) -> UIImage {
+    func hnk_imageByScaling(toSize size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, !hnk_hasAlpha(), 0.0)
         draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return resizedImage!
+        return resizedImage
     }
 
     func hnk_hasAlpha() -> Bool {
