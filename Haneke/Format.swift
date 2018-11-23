@@ -93,6 +93,8 @@ public struct ImageResizer {
         
         if let resizedImage = image.hnk_imageByScaling(toSize: resizeToSize) {
             return resizedImage
+        } else {
+            assertionFailure("Expected non-nil value for resized image")
         }
         
         return image
