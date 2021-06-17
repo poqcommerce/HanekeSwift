@@ -22,7 +22,7 @@ extension UIDevice {
     }
     
     // Calculate cache capacity based on the free space on the device.
-    // If free space can not be calculated, set 512MB as the Cache capacity
+    // If free space can not be calculated, set 1GB as the Cache capacity
     class func calculateCapacity() -> UInt64 {
         let bits = UIDevice.current.freeDiskSpaceInBits()
         let bytes = bits / 8
