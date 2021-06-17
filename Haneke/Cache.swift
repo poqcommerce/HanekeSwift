@@ -183,8 +183,8 @@ open class Cache<T: DataConvertible> where T.Result == T, T : DataRepresentable 
         let name = format.name
         let formatPath = self.formatPath(withFormatName: name)
         let memoryCache = NSCache<AnyObject, AnyObject>()
-        // Limit the Memory cache to 200 objects.
-        memoryCache.countLimit = 200
+        // Limit the Memory cache to 250 objects.
+        memoryCache.countLimit = 250
         let diskCache = DiskCache(path: formatPath, capacity : format.diskCapacity)
         self.formats[name] = (format, memoryCache, diskCache)
     }
