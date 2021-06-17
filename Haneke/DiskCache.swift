@@ -10,8 +10,6 @@ import Foundation
 
 open class DiskCache {
     
-    static public let capacity: UInt64 = UIDevice.calculateCapacity()
-
     open class func basePath() -> String {
         let cachesPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         let hanekePathComponent = HanekeGlobals.Domain
@@ -38,7 +36,7 @@ open class DiskCache {
         return cacheQueue
     }()
     
-    public init(path: String, capacity: UInt64 = DiskCache.capacity) {
+    public init(path: String, capacity: UInt64 = UINT64_MAX) {
         self.path = path
         self.capacity = capacity
         self.cacheQueue.async(execute: {
