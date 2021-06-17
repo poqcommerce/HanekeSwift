@@ -17,8 +17,8 @@ public struct Format<T> {
     public var transform : ((T) -> (T))?
     
     public var convertToData : ((T) -> Data)?
-
-    public init(name: String, diskCapacity : UInt64 = UINT64_MAX, transform: ((T) -> (T))? = nil) {
+        
+    public init(name: String, diskCapacity : UInt64 = DiskCache.capacity, transform: ((T) -> (T))? = nil) {
         self.name = name
         self.diskCapacity = diskCapacity
         self.transform = transform
